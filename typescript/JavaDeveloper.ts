@@ -1,4 +1,4 @@
-import { Developer } from './Developer.js';
+import type { Developer } from './Developer.ts';
 
 export class JavaDeveloper implements Developer {
     public writeCode(): void {

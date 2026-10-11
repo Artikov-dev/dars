@@ -1,10 +1,10 @@
-import { Developer } from './Developer.js';
-import { Tester } from './Tester.js';
-import { ProjectManager } from './ProjectManager.js';
-import { ProjectTeamFactory } from './ProjectTeamFactory.js';
-import { JavaDeveloper } from './JavaDeveloper.js';
-import { QATester } from './QATester.js';
-import { BankingPM } from './BankingPM.js';
+import type { Developer } from './Developer.ts';
+import type { Tester } from './Tester.ts';
+import type { ProjectManager } from './ProjectManager.ts';
+import type { ProjectTeamFactory } from './ProjectTeamFactory.ts';
+import { JavaDeveloper } from './JavaDeveloper.ts';
+import { QATester } from './QATester.ts';
+import { BankingPM } from './BankingPM.ts';
 
 export class BankingTeamFactory implements ProjectTeamFactory {
     public createDeveloper(): Developer {

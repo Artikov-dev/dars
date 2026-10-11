@@ -1,4 +1,4 @@
-import { Developer } from './Developer.js';
+import type { Developer } from './Developer.ts';
 
 export class CppDeveloper implements Developer {
     public writeCode(): void {

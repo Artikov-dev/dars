@@ -1,4 +1,4 @@
-import { Tester } from './Tester.js';
+import type { Tester } from './Tester.ts';
 
 export class NativeTester implements Tester {
     public testCode(): void {

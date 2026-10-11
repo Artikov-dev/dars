@@ -1,4 +1,4 @@
-import { ProjectManager } from './ProjectManager.js';
+import type { ProjectManager } from './ProjectManager.ts';
 
 export class SystemPM implements ProjectManager {
     public manageProject(): void {

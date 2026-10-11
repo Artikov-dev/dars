@@ -1,6 +1,6 @@
-import { Developer } from './Developer.js';
-import { Tester } from './Tester.js';
-import { ProjectManager } from './ProjectManager.js';
+import type { Developer } from './Developer.ts';
+import type { Tester } from './Tester.ts';
+import type { ProjectManager } from './ProjectManager.ts';
 
 export interface ProjectTeamFactory {
     createDeveloper(): Developer;

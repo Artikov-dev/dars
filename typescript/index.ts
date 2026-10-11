@@ -96,16 +96,34 @@ export class SystemTeamFactory implements ProjectTeamFactory {
     }
 }
 
-export function createDeveloperFactoryBySpeciality(speciality: string): DeveloperFactory {
-    const normalized = speciality.trim().toLowerCase();
+type FactoryConstructor = new () => DeveloperFactory;
 
-    if (normalized === "java") {
-        return new JavaDeveloperFactory();
-    } else if (normalized === "c++") {
-        return new CppDeveloperFactory();
-    } else {
-        throw new Error(`${speciality} is an empty or unknown speciality`);
+const factoryRegistry = new Map<string, FactoryConstructor>([
+    ['java', JavaDeveloperFactory],
+    ['c++', CppDeveloperFactory]
+]);
+
+export function createDeveloperFactoryBySpeciality(speciality: string): DeveloperFactory {
+    const key = speciality.trim().toLowerCase();
+    const FactoryClass = factoryRegistry.get(key);
+
+    if (!FactoryClass) {
+        const available = Array.from(factoryRegistry.keys()).join(', ');
+        throw new Error(`"${speciality}" is unknown. Available specialities: [${available}]`);
     }
+
+    return new FactoryClass();
+}
+
+function runProjectTeam(factory: ProjectTeamFactory, teamName: string): void {
+    console.log(`\n-> ${teamName}:`);
+    const developer = factory.createDeveloper();
+    const tester = factory.createTester();
+    const projectManager = factory.createProjectManager();
+
+    developer.writeCode();
+    tester.testCode();
+    projectManager.manageProject();
 }
 
 export function main(): void {
@@ -113,37 +131,19 @@ export function main(): void {
     console.log("           1. FACTORY METHOD PATTERN (TS)");
     console.log("==================================================");
 
-    const cppFactory: DeveloperFactory = createDeveloperFactoryBySpeciality("C++");
-    const cppDev: Developer = cppFactory.createDeveloper();
-    cppDev.writeCode();
-
-    const javaFactory: DeveloperFactory = createDeveloperFactoryBySpeciality("Java");
-    const javaDev: Developer = javaFactory.createDeveloper();
-    javaDev.writeCode();
+    const specialities = ["C++", "Java"];
+    for (const speciality of specialities) {
+        const factory = createDeveloperFactoryBySpeciality(speciality);
+        const developer = factory.createDeveloper();
+        developer.writeCode();
+    }
 
     console.log("\n==================================================");
     console.log("           2. ABSTRACT FACTORY PATTERN (TS)");
     console.log("==================================================");
 
-    console.log("-> Banking Team loyihasi (Java oilasi):");
-    const bankingFactory: ProjectTeamFactory = new BankingTeamFactory();
-    const bankDev: Developer = bankingFactory.createDeveloper();
-    const bankTester: Tester = bankingFactory.createTester();
-    const bankPM: ProjectManager = bankingFactory.createProjectManager();
-
-    bankDev.writeCode();
-    bankTester.testCode();
-    bankPM.manageProject();
-
-    console.log("\n-> System OS Team loyihasi (C++ oilasi):");
-    const systemFactory: ProjectTeamFactory = new SystemTeamFactory();
-    const sysDev: Developer = systemFactory.createDeveloper();
-    const sysTester: Tester = systemFactory.createTester();
-    const sysPM: ProjectManager = systemFactory.createProjectManager();
-
-    sysDev.writeCode();
-    sysTester.testCode();
-    sysPM.manageProject();
+    runProjectTeam(new BankingTeamFactory(), "Banking Team loyihasi (Java oilasi)");
+    runProjectTeam(new SystemTeamFactory(), "System OS Team loyihasi (C++ oilasi)");
 
     console.log("==================================================");
 }
