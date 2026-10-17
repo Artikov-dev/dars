@@ -42,6 +42,62 @@ export class CappuccinoFactory implements DrinkFactory {
     }
 }
 
+export interface Dessert {
+    name(): string;
+}
+
+export class Cake implements Dessert {
+    public name(): string {
+        return "Торт";
+    }
+}
+
+export class Cookie implements Dessert {
+    public name(): string {
+        return "Печенье";
+    }
+}
+
+export interface CafeFactory {
+    createDrink(): Drink;
+    createDessert(): Dessert;
+}
+
+export class CoffeeComboFactory implements CafeFactory {
+    public createDrink(): Drink {
+        return new Latte();
+    }
+
+    public createDessert(): Dessert {
+        return new Cake();
+    }
+}
+
+export class TeaComboFactory implements CafeFactory {
+    public createDrink(): Drink {
+        return new Tea();
+    }
+
+    public createDessert(): Dessert {
+        return new Cookie();
+    }
+}
+
+export class ComboCafe {
+    private readonly factory: CafeFactory;
+
+    constructor(factory: CafeFactory) {
+        this.factory = factory;
+    }
+
+    public orderCombo(): { drink: Drink; dessert: Dessert } {
+        const drink = this.factory.createDrink();
+        const dessert = this.factory.createDessert();
+        console.log(`Готовим и выдаём комбо: ${drink.name()} + ${dessert.name()}`);
+        return { drink, dessert };
+    }
+}
+
 export class Cafe {
     private static readonly registry = new Map<string, DrinkFactory>([
         ["coffee", new LatteFactory()],
@@ -106,14 +162,14 @@ export function createCafeByKind(kind: string): Cafe {
 
 function main(): void {
     console.log("==================================================");
-    console.log("      TASK 1: FACTORY METHOD PATTERN (TS)");
+    console.log("      TASK 1: DESIGN PATTERNS (TS)");
     console.log("==================================================");
 
     console.log("\n[1] GoF Factory Method orqali:");
     new CoffeeCafe().order();
     new TeaCafe().order();
 
-    console.log("\n[2] Asl Cafe(kind) orqali (if-else siz, Registry bilan):");
+    console.log("\n[2] Asl Cafe(kind) orqali (Registry bilan):");
     const kinds = ["coffee", "tea", "cappuccino"];
     for (const kind of kinds) {
         new Cafe(kind).order();
@@ -130,6 +186,10 @@ function main(): void {
             console.log(`Kutilgan xatolik: ${e.message}`);
         }
     }
+
+    console.log("\n[5] Abstract Factory orqali (Drink + Dessert):");
+    new ComboCafe(new CoffeeComboFactory()).orderCombo();
+    new ComboCafe(new TeaComboFactory()).orderCombo();
 
     console.log("\n==================================================");
 }

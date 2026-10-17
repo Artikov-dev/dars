@@ -65,3 +65,9 @@ export class TeaCafe extends Cafe {
 export function createCafeByKind(kind: string): Cafe {
     return new Cafe(kind);
 }
+
+export { ComboCafe } from './ComboCafe.ts';
+export type { CafeFactory } from './CafeFactory.ts';
+export { CoffeeComboFactory } from './CoffeeComboFactory.ts';
+export { TeaComboFactory } from './TeaComboFactory.ts';
+

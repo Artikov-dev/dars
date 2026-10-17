@@ -1,4 +1,4 @@
-import { CoffeeCafe, TeaCafe, createCafeByKind } from './Cafe.ts';
+import { CoffeeCafe, TeaCafe, createCafeByKind, ComboCafe, CoffeeComboFactory, TeaComboFactory } from './Cafe.ts';
 
 function printHeader(title: string): void {
     console.log("\n" + "=".repeat(55));
@@ -38,6 +38,15 @@ function main(): void {
             console.log(`Xatolik ushlandi: ${err.message}`);
         }
     }
+
+    printHeader("4. ABSTRACT FACTORY PATTERN");
+    console.log("Ichimlik va shirinlikdan iborat kombo buyurtma:\n");
+
+    const coffeeCombo = new ComboCafe(new CoffeeComboFactory());
+    coffeeCombo.orderCombo();
+
+    const teaCombo = new ComboCafe(new TeaComboFactory());
+    teaCombo.orderCombo();
 
     console.log("\n" + "=".repeat(55));
     console.log("   Muvaffaqiyatli yakunlandi!");
