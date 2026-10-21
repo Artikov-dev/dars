@@ -1,13 +1,13 @@
-type LogLevel = 'INFO' | 'WARN' | 'ERROR' | 'DEBUG';
+export type LogLevel = 'INFO' | 'WARN' | 'ERROR' | 'DEBUG';
 
-interface LogEntry {
+export interface LogEntry {
     timestamp: string;
     level: LogLevel;
     context: string;
     message: string;
 }
 
-class Logger {
+export class Logger {
     private static instance: Logger | null = null;
     private logs: LogEntry[] = [];
 
@@ -47,10 +47,10 @@ class Logger {
 
         this.logs.push(entry);
 
-        const badge = level === 'ERROR' ? '[ERROR] ❌'
-                    : level === 'WARN'  ? '[WARN ] ⚠️ '
-                    : level === 'DEBUG' ? '[DEBUG] 🔍'
-                    :                     '[INFO ] ℹ️ ';
+        const badge = level === 'ERROR' ? '[ERROR] '
+                    : level === 'WARN'  ? '[WARN ] '
+                    : level === 'DEBUG' ? '[DEBUG] '
+                    :                     '[INFO ] ';
 
         console.log(`[${time}] ${badge} [${context}] ${message}`);
     }
@@ -64,13 +64,13 @@ class Logger {
     }
 }
 
-class Database {
+export class Database {
     private static instance: Database | null = null;
     private isConnected: boolean = false;
     private logger = Logger.getInstance();
 
     private constructor() {
-        this.logger.info('Database', 'Ma\'lumotlar bazasi pooli yaratildi');
+        this.logger.info('Database', "Ma'lumotlar bazasi pooli yaratildi");
     }
 
     public static getInstance(): Database {
@@ -99,7 +99,7 @@ class Database {
     }
 }
 
-class UserService {
+export class UserService {
     private logger = Logger.getInstance();
     private db = Database.getInstance();
 
@@ -118,7 +118,7 @@ class UserService {
     }
 }
 
-function main(): void {
+export function main(): void {
     console.log("=== 1. SINGLETON IDENTITY TEKSHIRUVI ===");
     const logger1 = Logger.getInstance();
     const logger2 = Logger.getInstance();

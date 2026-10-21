@@ -50,7 +50,7 @@ export class Logger {
         const badge = level === 'ERROR' ? '[ERROR] '
                     : level === 'WARN'  ? '[WARN ] '
                     : level === 'DEBUG' ? '[DEBUG] '
-                    :                     '[INFO ] ';
+                    :                     '[INFO ] ℹ ';
 
         console.log(`[${time}] ${badge} [${context}] ${message}`);
     }
