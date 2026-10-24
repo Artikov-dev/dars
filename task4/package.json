@@ -1,0 +1,10 @@
+{
+  "name": "task4",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --experimental-strip-types GameRunner.ts",
+    "start": "node --experimental-strip-types GameRunner.ts",
+    "index": "node --experimental-strip-types index.ts"
+  }
+}
