@@ -1,3 +1,5 @@
+// saqlovchi
+
 import { GameCharacter } from './GameCharacter.ts';
 
 export class CharacterFactory {

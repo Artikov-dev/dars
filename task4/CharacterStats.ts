@@ -1,3 +1,5 @@
+// ichki obyekt
+
 import type { Copyable } from './Copyable.ts';
 
 export class CharacterStats implements Copyable<CharacterStats> {
