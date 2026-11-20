@@ -1,0 +1,9 @@
+{
+  "name": "task11",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --experimental-strip-types BankApp.ts",
+    "start": "node --experimental-strip-types BankApp.ts"
+  }
+}
