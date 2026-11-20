@@ -30,6 +30,6 @@ export class Block {
     }
 
     render(): string {
-        return `Blok [${this.x}, ${this.y}, ${this.z}] -> ${this.type.toString()}`;
+        return `[${this.x},${this.y},${this.z}] ${this.type}`;
     }
 }

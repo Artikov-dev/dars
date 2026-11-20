@@ -10,12 +10,10 @@ export class World {
     }
 
     render(): void {
-        console.log(`\nO'yin dunyosi (${this.blocks.length} ta blok):\n`);
         for (const block of this.blocks) {
-            console.log(`  ${block.render()}`);
+            console.log(block.render());
         }
-        console.log(`\nJami bloklar soni: ${this.blocks.length}`);
-        console.log(`Noyob BlockType obyektlari: ${BlockFactory.getUniqueCount()}`);
+        console.log(`\nBloklar: ${this.blocks.length} | Noyob turlar: ${BlockFactory.getUniqueCount()}`);
     }
 
     getBlocks(): Block[] {

@@ -22,6 +22,6 @@ export class BlockType {
     }
 
     toString(): string {
-        return `[${this.name} | texture: ${this.texture} | color: ${this.color}]`;
+        return this.name;
     }
 }
